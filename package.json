@@ -1,0 +1,50 @@
+{
+  "name": "form-orchestrator",
+  "version": "0.1.0",
+  "description": "Lightweight, backend-agnostic frontend orchestration middleware for form submissions. Resolves context, builds canonical entities, and forwards via composable adapters — built for Next.js BFF routes.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "form",
+    "orchestration",
+    "middleware",
+    "bff",
+    "nextjs",
+    "gravity-forms",
+    "wordpress",
+    "adapter",
+    "context",
+    "resolver"
+  ],
+  "author": "Grahame Thomson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mrgrt/form-orchestrator.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

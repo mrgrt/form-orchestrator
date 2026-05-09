@@ -1,0 +1,23 @@
+{
+  "adapter": {
+    "type": "gravityForms",
+    "formId": 2,
+    "fields": {
+      "input_6": "{{trainer.id}}",
+      "input_7": "{{trainer.slug}}",
+      "input_8": "public_testimonial_form"
+    }
+  },
+  "context": {
+    "trainer": {
+      "source": "params.slug",
+      "resolver": {
+        "type": "api",
+        "endpoint": "/wp-json/your-namespace/v1/trainers/{value}"
+      }
+    }
+  },
+  "metadata": {
+    "submission.source": "public_testimonial_form"
+  }
+}
