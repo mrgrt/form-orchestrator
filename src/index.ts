@@ -10,6 +10,7 @@ export { loadFormConfig } from "./core/loadFormConfig.js";
 
 // ── Adapters ─────────────────────────────────────────────────────────────
 export { gravityFormsAdapter } from "./adapters/gravityForms.js";
+export { gravityFormsRestAdapter } from "./adapters/gravityFormsRest.js";
 export { restAdapter } from "./adapters/rest.js";
 export { defaultAdapters } from "./adapters/index.js";
 
@@ -39,6 +40,7 @@ export type {
   FormConfig,
   FunctionResolver,
   GravityFormsAdapterConfig,
+  GravityFormsRestAdapterConfig,
   ResolutionContext,
   Resolver,
   ResolverHandler,

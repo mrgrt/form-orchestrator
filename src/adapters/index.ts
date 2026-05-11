@@ -1,5 +1,6 @@
 import type { AdapterRegistry } from "../types/index.js";
 import { gravityFormsAdapter } from "./gravityForms.js";
+import { gravityFormsRestAdapter } from "./gravityFormsRest.js";
 import { restAdapter } from "./rest.js";
 
 /**
@@ -8,5 +9,6 @@ import { restAdapter } from "./rest.js";
  */
 export const defaultAdapters: AdapterRegistry = {
   gravityForms: gravityFormsAdapter,
+  gravityFormsRest: gravityFormsRestAdapter,
   rest: restAdapter,
 };

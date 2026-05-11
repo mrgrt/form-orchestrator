@@ -33,8 +33,12 @@ export type GravityFormsAdapterConfig = {
   type: "gravityForms";
   formId: number;
   endpoint?: string;
-  /** Map of `input_<id>` ← literal value or `{{path}}` interpolation
-   *  resolved against the canonical context. */
+  /** Map of Gravity Forms field key ← literal value or `{{path}}` interpolation
+   *  resolved against the canonical context.
+   *
+   *  Keys may be a bare field ID (`"6"`), a dotted sub-ID (`"1.3"`), or the
+   *  explicit input name (`"input_6"` / `"input_1_3"`); the adapter normalizes
+   *  them all to GF's `input_*` form before submission. */
   fields?: Record<string, string>;
 };
 
@@ -44,7 +48,24 @@ export type RestAdapterConfig = {
   method?: "POST" | "PUT" | "PATCH";
 };
 
-export type AdapterConfig = GravityFormsAdapterConfig | RestAdapterConfig;
+/** POST `/wp-json/gf/v2/forms/{formId}/submissions` (JSON `input_*` keys). */
+export type GravityFormsRestAdapterConfig = {
+  type: "gravityFormsRest";
+  formId: number;
+  /** Base URL for GF REST v2, e.g. `https://example.com/wp-json/gf/v2`. */
+  endpoint?: string;
+  /** Map of Gravity Forms field key ← literal value or `{{path}}` interpolation.
+   *
+   *  Keys may be a bare field ID (`"6"`), a dotted sub-ID (`"1.3"`), or the
+   *  explicit input name (`"input_6"` / `"input_1_3"`). All forms are
+   *  normalized to GF's `input_*` shape before POSTing. */
+  fields?: Record<string, string>;
+};
+
+export type AdapterConfig =
+  | GravityFormsAdapterConfig
+  | GravityFormsRestAdapterConfig
+  | RestAdapterConfig;
 
 // ── Form config ──────────────────────────────────────────────────────────
 

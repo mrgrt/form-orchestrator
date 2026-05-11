@@ -58,6 +58,16 @@ function resolveEndpoint(config: GravityFormsAdapterConfig): string | undefined 
 }
 
 /**
+ * Normalize a `fields` config key into a Gravity Forms input name.
+ *   "6"        → "input_6"
+ *   "input_6"  → "input_6" (passthrough)
+ */
+function toGfInputKey(key: string): string {
+  if (key.startsWith("input_")) return key;
+  return `input_${key.replace(/\./g, "_")}`;
+}
+
+/**
  * Adapter for the [`wp-graphql-gravity-forms`](https://github.com/harness-software/wp-graphql-gravity-forms)
  * `submitGfForm` mutation. Decodes the incoming `next-gravity-forms` request,
  * applies the canonical-context-driven `fields` map, and re-emits the GraphQL
@@ -102,8 +112,8 @@ export const gravityFormsAdapter: FormAdapter<GravityFormsAdapterConfig> = {
     // literals; `{{path}}` references resolve against the canonical context.
     // These ALWAYS win over user-submitted values for the same input key.
     if (config.fields) {
-      for (const [inputKey, rawValue] of Object.entries(config.fields)) {
-        merged[inputKey] = interpolate(rawValue, canonicalContext);
+      for (const [rawKey, rawValue] of Object.entries(config.fields)) {
+        merged[toGfInputKey(rawKey)] = interpolate(rawValue, canonicalContext);
       }
     }
 
